@@ -12,3 +12,4 @@ Esse repositório contem o código-fonte produzido durante as aulas do curso "La
 | feat: primeira spec | [c544bd1](https://github.com/treinaweb/treinaweb-sdd/commit/c544bd1fdc0f262965c2c891a0f6da2f763c279e) |
 | fix: correção de bug serialização | [47131e4](https://github.com/treinaweb/treinaweb-sdd/commit/47131e43171b9606f5482229f3cae62c0a79da59) |
 | feat: spec 005 design system | [d45b199](https://github.com/treinaweb/treinaweb-sdd/commit/d45b199262746fa4e6349bfb99a2220628e1f883) |
+| openspec | [bb78917](https://github.com/treinaweb/treinaweb-sdd/commit/bb789173de3a68dfbbb70fc595b57075f47a49a7) |
