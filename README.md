@@ -1,36 +1,14 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Curso: LangChain - Fundamentos
 
-## Getting Started
+Esse repositório contem o código-fonte produzido durante as aulas do curso "LangChain - Fundamentos" da TreinaWeb.
 
-First, run the development server:
+## Lista de Commits
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+| Commit | Link |
+| --- | --- |
+| Initial commit from Create Next App | [7344b9b](https://github.com/treinaweb/treinaweb-sdd/commit/7344b9b54a47f6bdc29c567402aa6e0dac465ce1) |
+| core: estrutura e arquivos memory | [87b76ff](https://github.com/treinaweb/treinaweb-sdd/commit/87b76ff0fcf103e1caec6c4635a3320f00684cc0) |
+| core: shared e arquivos | [160df18](https://github.com/treinaweb/treinaweb-sdd/commit/160df18931691a004ac03ee7c3e0001e578e2888) |
+| feat: primeira spec | [c544bd1](https://github.com/treinaweb/treinaweb-sdd/commit/c544bd1fdc0f262965c2c891a0f6da2f763c279e) |
+| fix: correção de bug serialização | [47131e4](https://github.com/treinaweb/treinaweb-sdd/commit/47131e43171b9606f5482229f3cae62c0a79da59) |
+| feat: spec 005 design system | [d45b199](https://github.com/treinaweb/treinaweb-sdd/commit/d45b199262746fa4e6349bfb99a2220628e1f883) |

@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+import { AlternadorDeTema } from "@/ui/alternador-de-tema.componente";
+
 const ITENS_DE_NAVEGACAO = [
   { href: "/tutores", rotulo: "Tutores" },
   { href: "/pets", rotulo: "Pets" },
@@ -31,6 +33,7 @@ export function NavBar() {
           );
         })}
       </div>
+      <AlternadorDeTema className="ml-auto" />
     </nav>
   );
 }
