@@ -11,3 +11,25 @@ generator client {
 datasource db {
   provider = "sqlite"
 }
+
+model Tutor {
+  id       String  @id @default(cuid())
+  nome     String
+  email    String  @unique
+  telefone String?
+  ativo    Boolean @default(true)
+  pets     Pet[]
+}
+
+model Pet {
+  id          String  @id @default(cuid())
+  tutorId     String
+  tutor       Tutor   @relation(fields: [tutorId], references: [id])
+  nome        String
+  especie     String
+  porte       String
+  observacoes String?
+  ativo       Boolean @default(true)
+
+  @@index([tutorId])
+}

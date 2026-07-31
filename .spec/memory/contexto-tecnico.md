@@ -35,6 +35,16 @@ O ambiente já está configurado com um projeto Next.js pronto para receber as s
   ```
   Server Action nunca lança para o cliente: captura o `ErroDeDominio`, converte em
   lista e devolve.
+- Toda Server Action que devolve um `Resultado<T>` vindo de um caso de uso do domínio
+  passa antes por `paraResultadoSerializavel` (`src/app/acoes/resultado-serializavel.ts`),
+  convertendo `erros: ErroDeDominio[]` em objetos simples `{ codigo, campo? }`. O
+  protocolo Flight do React só serializa objetos simples entre Server Action e Client
+  Component; devolver a instância de `ErroDeDominio` crua quebra a hidratação com
+  `Only plain objects... Classes or null prototypes are not supported` (só aparece no
+  navegador real, ver restrição de verificação manual abaixo). Testes de integração de
+  Server Action que cobrem um cenário de erro devem incluir
+  `expect(Object.getPrototypeOf(resultado.erros[0])).toBe(Object.prototype)` para pegar
+  regressão.
 - `params` e `searchParams` de páginas e Route Handlers são **assíncronos** no Next 16.
   Toda página que os usa é `async` e faz `await` antes de acessar as propriedades.
 - Datas e horas trafegam em ISO 8601. A borda resolve o fuso `America/Sao_Paulo` antes
@@ -54,6 +64,13 @@ O ambiente já está configurado com um projeto Next.js pronto para receber as s
   uma via e siga.
 - Componentes que fazem I/O (banco, `fetch` autenticado) permanecem como Server
   Components. `"use client"` só onde há estado, evento ou API de browser.
+- Verificação manual de página com Server Action + `useActionState` precisa de
+  navegador real (Claude in Chrome ou o usuário testando e relatando o console). `curl`
+  simulando o POST de progressive enhancement confirma que a Server Action roda e o
+  HTML final tem o texto certo, mas nunca executa o JavaScript do cliente — não pega
+  erro de hidratação (ex.: valor não serializável, ver restrição acima). Registrar
+  verificação via `curl` como parcial/incompleta na evidência, nunca como confirmação
+  de que a página funciona ponta a ponta.
 
 ## Revalidação e cache
 
