@@ -22,14 +22,27 @@ model Tutor {
 }
 
 model Pet {
-  id          String  @id @default(cuid())
-  tutorId     String
-  tutor       Tutor   @relation(fields: [tutorId], references: [id])
-  nome        String
-  especie     String
-  porte       String
-  observacoes String?
-  ativo       Boolean @default(true)
+  id           String        @id @default(cuid())
+  tutorId      String
+  tutor        Tutor         @relation(fields: [tutorId], references: [id])
+  nome         String
+  especie      String
+  porte        String
+  observacoes  String?
+  ativo        Boolean       @default(true)
+  atendimentos Atendimento[]
 
   @@index([tutorId])
+}
+
+model Atendimento {
+  id     String   @id @default(cuid())
+  petId  String
+  pet    Pet      @relation(fields: [petId], references: [id])
+  inicio DateTime
+  fim    DateTime
+  status String
+
+  @@index([petId])
+  @@index([inicio, fim])
 }

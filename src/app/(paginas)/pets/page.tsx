@@ -1,5 +1,6 @@
 import { petPrismaRepositorio } from "@/infra/repositorios/pet.prisma-repositorio";
 import { tutorPrismaRepositorio } from "@/infra/repositorios/tutor.prisma-repositorio";
+import { Cartao } from "@/ui/cartao.componente";
 
 import { PetFormulario } from "./pet.formulario";
 
@@ -16,40 +17,44 @@ export default async function PaginaPets() {
 
   return (
     <div className="flex flex-col gap-8 p-8 max-w-3xl mx-auto w-full">
-      <h1 className="text-2xl font-semibold">Pets</h1>
+      <h1 className="text-2xl font-medium tracking-tight text-ink">Pets</h1>
 
-      <table className="w-full text-sm border-collapse">
-        <thead>
-          <tr className="text-left border-b">
-            <th className="py-2 pr-4">Nome</th>
-            <th className="py-2 pr-4">Espécie</th>
-            <th className="py-2 pr-4">Porte</th>
-            <th className="py-2 pr-4">Tutor</th>
-          </tr>
-        </thead>
-        <tbody>
-          {pets.map((pet) => (
-            <tr key={pet.id} className="border-b">
-              <td className="py-2 pr-4">{pet.nome}</td>
-              <td className="py-2 pr-4">{NOMES_ESPECIE[pet.especie] ?? pet.especie}</td>
-              <td className="py-2 pr-4">{pet.porte}</td>
-              <td className="py-2 pr-4">{nomeDoTutorPorId.get(pet.tutorId) ?? "-"}</td>
+      <Cartao padded={false} className="overflow-hidden">
+        <table className="w-full text-sm">
+          <thead>
+            <tr className="text-left border-b border-hairline text-ink-mute">
+              <th className="py-3 px-4 font-medium">Nome</th>
+              <th className="py-3 px-4 font-medium">Espécie</th>
+              <th className="py-3 px-4 font-medium">Porte</th>
+              <th className="py-3 px-4 font-medium">Tutor</th>
             </tr>
-          ))}
-          {pets.length === 0 && (
-            <tr>
-              <td colSpan={4} className="py-4 text-zinc-500">
-                Nenhum pet cadastrado.
-              </td>
-            </tr>
-          )}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {pets.map((pet) => (
+              <tr key={pet.id} className="border-b border-hairline last:border-0">
+                <td className="py-3 px-4 text-ink">{pet.nome}</td>
+                <td className="py-3 px-4 text-ink">{NOMES_ESPECIE[pet.especie] ?? pet.especie}</td>
+                <td className="py-3 px-4 text-ink">{pet.porte}</td>
+                <td className="py-3 px-4 text-ink">{nomeDoTutorPorId.get(pet.tutorId) ?? "-"}</td>
+              </tr>
+            ))}
+            {pets.length === 0 && (
+              <tr>
+                <td colSpan={4} className="py-6 px-4 text-ink-mute">
+                  Nenhum pet cadastrado.
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </Cartao>
 
-      <PetFormulario
-        pet={null}
-        tutores={tutoresAtivos.map((tutor) => ({ id: tutor.id as string, nome: tutor.nome }))}
-      />
+      <Cartao>
+        <PetFormulario
+          pet={null}
+          tutores={tutoresAtivos.map((tutor) => ({ id: tutor.id as string, nome: tutor.nome }))}
+        />
+      </Cartao>
     </div>
   );
 }

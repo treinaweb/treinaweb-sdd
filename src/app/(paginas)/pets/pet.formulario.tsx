@@ -4,6 +4,8 @@ import { useActionState, useEffect, useRef } from "react";
 
 import { salvarPet } from "@/app/acoes/pet.acoes";
 import { Resultado } from "@/dominio/compartilhado/resultado";
+import { Botao } from "@/ui/botao.componente";
+import { CampoDeFormulario, classeEntrada } from "@/ui/campo-de-formulario.componente";
 import { ListaDeErros } from "@/ui/lista-de-erros.componente";
 
 import { traduzirCodigoDeErro } from "../mensagens";
@@ -43,17 +45,16 @@ export function PetFormulario({
   const mensagensDeErro = estado.ok ? [] : estado.erros.map((erro) => traduzirCodigoDeErro(erro.codigo));
 
   return (
-    <form ref={formularioRef} action={acao} className="flex flex-col gap-3 max-w-md">
-      <h2 className="text-lg font-semibold">{pet ? "Editar pet" : "Novo pet"}</h2>
+    <form ref={formularioRef} action={acao} className="flex flex-col gap-4 max-w-md">
+      <h2 className="text-lg font-medium text-ink">{pet ? "Editar pet" : "Novo pet"}</h2>
 
       <input type="hidden" name="id" defaultValue={pet?.id ?? ""} />
 
-      <label className="flex flex-col gap-1 text-sm">
-        Tutor
+      <CampoDeFormulario rotulo="Tutor">
         <select
           name="tutorId"
           defaultValue={pet?.tutorId ?? ""}
-          className="border rounded px-2 py-1"
+          className={classeEntrada}
           required
         >
           <option value="" disabled>
@@ -65,54 +66,46 @@ export function PetFormulario({
             </option>
           ))}
         </select>
-      </label>
+      </CampoDeFormulario>
 
-      <label className="flex flex-col gap-1 text-sm">
-        Nome
+      <CampoDeFormulario rotulo="Nome">
         <input
           type="text"
           name="nome"
           defaultValue={pet?.nome ?? ""}
-          className="border rounded px-2 py-1"
+          className={classeEntrada}
           required
         />
-      </label>
+      </CampoDeFormulario>
 
-      <label className="flex flex-col gap-1 text-sm">
-        Espécie
-        <select
-          name="especie"
-          defaultValue={pet?.especie ?? "CACHORRO"}
-          className="border rounded px-2 py-1"
-        >
+      <CampoDeFormulario rotulo="Espécie">
+        <select name="especie" defaultValue={pet?.especie ?? "CACHORRO"} className={classeEntrada}>
           <option value="CACHORRO">Cachorro</option>
           <option value="GATO">Gato</option>
         </select>
-      </label>
+      </CampoDeFormulario>
 
-      <label className="flex flex-col gap-1 text-sm">
-        Porte
-        <select name="porte" defaultValue={pet?.porte ?? "M"} className="border rounded px-2 py-1">
+      <CampoDeFormulario rotulo="Porte">
+        <select name="porte" defaultValue={pet?.porte ?? "M"} className={classeEntrada}>
           <option value="P">Pequeno</option>
           <option value="M">Médio</option>
           <option value="G">Grande</option>
         </select>
-      </label>
+      </CampoDeFormulario>
 
-      <label className="flex flex-col gap-1 text-sm">
-        Observações
+      <CampoDeFormulario rotulo="Observações">
         <textarea
           name="observacoes"
           defaultValue={pet?.observacoes ?? ""}
-          className="border rounded px-2 py-1"
+          className={classeEntrada}
         />
-      </label>
+      </CampoDeFormulario>
 
       <ListaDeErros mensagens={mensagensDeErro} />
 
-      <button type="submit" disabled={pendente} className="border rounded px-3 py-1 self-start">
+      <Botao type="submit" variante="primaria" disabled={pendente} className="self-start">
         {pendente ? "Salvando..." : "Salvar"}
-      </button>
+      </Botao>
     </form>
   );
 }

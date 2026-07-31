@@ -4,6 +4,8 @@ import { useActionState, useEffect, useRef } from "react";
 
 import { salvarTutor } from "@/app/acoes/tutor.acoes";
 import { Resultado } from "@/dominio/compartilhado/resultado";
+import { Botao } from "@/ui/botao.componente";
+import { CampoDeFormulario, classeEntrada } from "@/ui/campo-de-formulario.componente";
 import { ListaDeErros } from "@/ui/lista-de-erros.componente";
 
 import { traduzirCodigoDeErro } from "../mensagens";
@@ -30,48 +32,45 @@ export function TutorFormulario({ tutor }: { tutor: TutorParaEdicao | null }) {
   const mensagensDeErro = estado.ok ? [] : estado.erros.map((erro) => traduzirCodigoDeErro(erro.codigo));
 
   return (
-    <form ref={formularioRef} action={acao} className="flex flex-col gap-3 max-w-md">
-      <h2 className="text-lg font-semibold">{tutor ? "Editar tutor" : "Novo tutor"}</h2>
+    <form ref={formularioRef} action={acao} className="flex flex-col gap-4 max-w-md">
+      <h2 className="text-lg font-medium text-ink">{tutor ? "Editar tutor" : "Novo tutor"}</h2>
 
       <input type="hidden" name="id" defaultValue={tutor?.id ?? ""} />
 
-      <label className="flex flex-col gap-1 text-sm">
-        Nome completo
+      <CampoDeFormulario rotulo="Nome completo">
         <input
           type="text"
           name="nome"
           defaultValue={tutor?.nome ?? ""}
-          className="border rounded px-2 py-1"
+          className={classeEntrada}
           required
         />
-      </label>
+      </CampoDeFormulario>
 
-      <label className="flex flex-col gap-1 text-sm">
-        E-mail
+      <CampoDeFormulario rotulo="E-mail">
         <input
           type="text"
           name="email"
           defaultValue={tutor?.email ?? ""}
-          className="border rounded px-2 py-1"
+          className={classeEntrada}
           required
         />
-      </label>
+      </CampoDeFormulario>
 
-      <label className="flex flex-col gap-1 text-sm">
-        Telefone
+      <CampoDeFormulario rotulo="Telefone">
         <input
           type="text"
           name="telefone"
           defaultValue={tutor?.telefone ?? ""}
-          className="border rounded px-2 py-1"
+          className={classeEntrada}
         />
-      </label>
+      </CampoDeFormulario>
 
       <ListaDeErros mensagens={mensagensDeErro} />
 
-      <button type="submit" disabled={pendente} className="border rounded px-3 py-1 self-start">
+      <Botao type="submit" variante="primaria" disabled={pendente} className="self-start">
         {pendente ? "Salvando..." : "Salvar"}
-      </button>
+      </Botao>
     </form>
   );
 }
